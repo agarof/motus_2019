@@ -1,6 +1,6 @@
 override CFLAGS	+=	-W -Wall -Wextra
 CPPFLAGS	=	-I ./include
-LDFLAGS		=	-lcsfml-graphics -lcsfml-window -lcsfml-system
+LDFLAGS		=	-lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
 
 CC		=	gcc
 
@@ -16,6 +16,7 @@ SRC		=	src/game_handling/board_display.c		\
 			src/game_handling/line_validation.c		\
 			src/structures_handling/board_handling.c	\
 			src/structures_handling/resource_handling.c	\
+			src/structures_handling/sound_list_handling.c	\
 			src/utilities/binary_toolbox.c			\
 			src/utilities/get_next_line.c			\
 			src/utilities/line_parsing.c			\
