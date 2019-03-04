@@ -40,10 +40,10 @@ void validation_loop(resource_t *resource)
             board->current_match += check_letter(resource, board, row, len);
             ++board->current_row;
             sfClock_restart(board->interval);
+            display_time_left(resource, board);
         }
     }
     else if (sfClock_getElapsedTime(board->interval).microseconds >= 250000) {
         validate_word(resource, board);
     }
-    display_time_left(resource, board);
 }

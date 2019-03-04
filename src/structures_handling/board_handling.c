@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #include <SFML/Graphics.h>
+#include "resources/sound_id.h"
 #include "structures/resource.h"
 #include "structures/level_resource.h"
+#include "functions/sound_list_handling.h"
 #include "functions/board_shapes_creation.h"
 
 void free_current_word(board_t *board)
@@ -26,7 +28,18 @@ void free_board(board_t *board)
     sfRectangleShape_destroy(board->yellow_rectangle);
     sfText_destroy(board->countdown);
     sfText_destroy(board->letter);
+    free_sounds(board->sound_list);
     free(board);
+}
+
+void create_sound_buffers(board_t *board)
+{
+    board->sound_list = NULL;
+    board->sound_list = add_sound(board->sound_list, WIN);
+    board->sound_list = add_sound(board->sound_list, LOSE);
+    board->sound_list = add_sound(board->sound_list, MATCH);
+    board->sound_list = add_sound(board->sound_list, SEMI_MATCH);
+    board->sound_list = add_sound(board->sound_list, NO_MATCH);
 }
 
 board_t *board_init(resource_t *resource)
@@ -47,6 +60,7 @@ board_t *board_init(resource_t *resource)
         sfText_setFont(board->countdown, resource->font);
         sfText_setPosition(board->countdown, time_pos);
         sfText_setFont(board->letter, resource->font);
+        create_sound_buffers(board);
         create_board_shapes(board, resource->width, resource->height);
     }
     return (board);

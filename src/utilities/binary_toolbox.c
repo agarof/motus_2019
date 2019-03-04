@@ -7,3 +7,18 @@ int get_bit(int nbr)
     }
     return (bit);
 }
+
+int get_bit_count(int count)
+{
+    int size = sizeof(int) * 8;
+    int result = 0;
+    int pos = 0;
+
+    while (pos < size) {
+        if (count | (1 << pos)) {
+            ++result;
+        }
+        ++pos;
+    }
+    return (result);
+}
